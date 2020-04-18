@@ -16,7 +16,9 @@ namespace TamiradiOtayoriReader
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterSingleton<ViewModels.MainWindowViewModel>();
+            containerRegistry.RegisterSingleton<ViewModels.ConfigWindowViewModel>();
+            containerRegistry.RegisterDialog<ConfigWindow>(typeof(ConfigWindow).FullName);
         }
     }
 }
