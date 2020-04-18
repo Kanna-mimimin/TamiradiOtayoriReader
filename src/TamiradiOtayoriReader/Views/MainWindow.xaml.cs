@@ -10,6 +10,7 @@ namespace TamiradiOtayoriReader.Views
         public MainWindow()
         {
             InitializeComponent();
+            this.MouseLeftButtonDown += (sender, e) => { this.DragMove(); };
         }
     }
 }
