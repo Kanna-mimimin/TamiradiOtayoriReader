@@ -8,11 +8,18 @@ namespace TamiradiOtayoriReader.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return (int)value + 1;
+            var param = 0;
+
+            if(parameter is int)
+            {
+                param = (int)parameter;
+            }
+
+            return (int)value + 1 + param;
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return int.Parse((string)value) - 1;
+            return int.Parse((string)value) - 1 - (int)parameter;
         }
     }
 

@@ -8,13 +8,24 @@
         Title="たみらじ!!おたよりReader"
         MinWidth="100" MinHeight="100"
         SizeToContent="WidthAndHeight"
-        WindowStyle="None"
-    AllowsTransparency="True"
-        Background="Transparent">
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        >
     <Window.Resources>
-        <Converters:DoubleGridLengthConverter x:Key="DoubleGridLengthConver"/>
-        <Converters:IndexNo2DStringVisualNoConverter x:Key="IndexNo2DStringVisualNoConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ScrollBarStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Converters:DoubleGridLengthConverter x:Key="DoubleGridLengthConver"/>
+            <Converters:IndexNo2DStringVisualNoConverter x:Key="IndexNo2DStringVisualNoConverter"/>
+            <Converters:ColorToSolidColorBrushValueConverter  x:Key="ColorToSolidColorBrushValueConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{Binding Config.BackgroundColor.Value, Converter={StaticResource ColorToSolidColorBrushValueConverter}}"/>
+        </Style>
+    </Window.Style>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseRightButtonDown">
             <i:InvokeCommandAction Command="{Binding OpenConfigCommand}"/>
@@ -24,6 +35,7 @@
     <Grid Width="{Binding ActualWidth,ElementName=Image}" Height="{Binding ActualHeight, ElementName=Image}">
         <Image x:Name="Image" Source="{Binding OtayoriImage.Value}" Stretch="None" />
 
+        <!--おたより数情報-->
         <Grid Width="{Binding ActualWidth,ElementName=Image}" Height="{Binding ActualHeight, ElementName=Image}">
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -57,7 +69,6 @@
             <GridSplitter Grid.Column="0" Grid.RowSpan="3" Width="5" Background="Green"/>
             <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Green"/>
 
-            <!--おたより数情報-->
             <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -74,6 +85,7 @@
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="FontSize" Value="{Binding Config.CounterFontSize.Value}"/>
+                                <Setter Property="Foreground"  Value="{Binding Config.CounterFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}"/>
                             </Style>
                         </StackPanel.Resources>
                         <TextBlock Text="[" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,3,0"/>
@@ -82,7 +94,7 @@
                         <TextBlock Text="{Binding Otayoris.Count}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Viewbox Height="{Binding ActualHeight,ElementName=Text}" Margin="5,0,0,0">
                             <Canvas Width="24" Height="24">
-                                <Path Fill="Black" Data="M2 6V20H20V22H2C.895 22 0 21.11 0 20V6H2M24 4C24 2.9 23.1 2 22 2H6C4.9 2 4 2.9 4 4V16C4 17.1 4.9 18 6 18H22C23.1 18 24 17.1 24 16V4M22 4L14 9L6 4H22M22 16H6V6L14 11L22 6V16Z" />
+                                <Path Fill="{Binding Config.CounterFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}" Data="M2 6V20H20V22H2C.895 22 0 21.11 0 20V6H2M24 4C24 2.9 23.1 2 22 2H6C4.9 2 4 2.9 4 4V16C4 17.1 4.9 18 6 18H22C23.1 18 24 17.1 24 16V4M22 4L14 9L6 4H22M22 16H6V6L14 11L22 6V16Z" />
                             </Canvas>
                         </Viewbox>
                         <TextBlock x:Name="Text" Text="]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,0,0"/>
@@ -91,7 +103,7 @@
             </Grid>
         </Grid>
 
-
+        <!--お名前-->
         <Grid Width="{Binding ActualWidth,ElementName=Image}" Height="{Binding ActualHeight, ElementName=Image}">
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -129,8 +141,7 @@
 
             <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Orange"/>
             <GridSplitter Grid.Row="2" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Orange"/>
-
-            <!--お名前-->
+            
             <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Viewbox StretchDirection="DownOnly">
                     <Viewbox.Style>
@@ -144,13 +155,14 @@
                         </Style>
                     </Viewbox.Style>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Otayori.Value.Name}" FontSize="{Binding Config.NameFontSize.Value}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-                        <TextBlock Text="{Binding Config.Keisyou.Value}" FontSize="{Binding Config.KeisyouFontSize.Value}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                        <TextBlock Text="{Binding Otayori.Value.Name}" FontFamily="{Binding Config.NameFontFamily.Value}" FontSize="{Binding Config.NameFontSize.Value}" Foreground="{Binding Config.NameFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                        <TextBlock Text="{Binding Config.Keisyou.Value}" FontFamily="{Binding Config.KeisyouFontFamily.Value}" FontSize="{Binding Config.KeisyouFontSize.Value}" Foreground="{Binding Config.KeisyouFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                     </StackPanel>
                 </Viewbox>
             </Grid>
         </Grid>
 
+        <!--本文-->
         <Grid Width="{Binding ActualWidth,ElementName=Image}" Height="{Binding ActualHeight, ElementName=Image}">
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -189,50 +201,38 @@
             <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Sienna"/>
             <GridSplitter Grid.Row="2" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Sienna"/>
 
-
-            <!--本文-->
             <Grid  Grid.Row="1" Grid.Column="1" x:Name="ContentBase">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ScrollViewer.Style>
-                        <Style TargetType="{x:Type ScrollViewer}">
-                            <Setter Property="OverridesDefaultStyle" Value="True"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <ScrollContentPresenter Grid.Column="1"/>
-
-                                            <ScrollBar Name="PART_VerticalScrollBar"
-                        Value="{TemplateBinding VerticalOffset}"
-                        Maximum="{TemplateBinding ScrollableHeight}"
-                        ViewportSize="{TemplateBinding ViewportHeight}"
-                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
-                                            <ScrollBar Name="PART_HorizontalScrollBar"
-                        Orientation="Horizontal"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Value="{TemplateBinding HorizontalOffset}"
-                        Maximum="{TemplateBinding ScrollableWidth}"
-                        ViewportSize="{TemplateBinding ViewportWidth}"
-                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
-
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
+                        <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource CustomScrollViewerStyle}" >
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Config.IsContentScrollbarRight.Value}" Value="False" >
+                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <ScrollContentPresenter Grid.Column="1"/>
+                                                    <ScrollBar Name="PART_VerticalScrollBar" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Style="{StaticResource CustomScrollBarStyle}"/>
+                                                    <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Value="{TemplateBinding HorizontalOffset}" Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Style="{StaticResource CustomScrollBarStyle}"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
                         </Style>
                     </ScrollViewer.Style>
-                    <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <TextBlock FontSize="{Binding Config.ContentFontSize.Value}" Text="{Binding Otayori.Value.Content}" VerticalAlignment="Top" HorizontalAlignment="Left" IsHitTestVisible="False">
+                    <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0">
+                        <TextBlock Text="{Binding Otayori.Value.Content}" FontFamily="{Binding Config.ContentFontFamily.Value}" FontSize="{Binding Config.ContentFontSize.Value}" Foreground="{Binding Config.ContentFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left" IsHitTestVisible="False">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="TextWrapping" Value="NoWrap"/>
