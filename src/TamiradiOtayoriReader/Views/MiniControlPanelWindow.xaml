@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="TamiradiOtayoriReader.Views.MiniControlPanelWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel Orientation="Horizontal">
+
+        <Button Width="150" Height="50" Command="{Binding OtayoriBackCommand}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&lt;" Margin="0,0,10,0"/>
+                    <TextBlock Text="前の おたより"/>
+                    <TextBlock Margin="10,0,0,0">
+                        <TextBlock.Text>
+                            <Binding Path="OtayoriIndex.Value" Converter="{StaticResource IndexNo2DStringVisualNoConverter}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>-1</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text="通目"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox  StretchDirection="DownOnly" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding OtayoriBack.Value.Name}"/>
+                    </Viewbox>
+                    <TextBlock Text=" さん"/>
+                </StackPanel>
+            </StackPanel>
+        </Button>
+
+        <Grid  Width="150" Height="50">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="現在の おたより"/>
+                    <TextBlock Margin="10,0,0,0">
+                        <TextBlock.Text>
+                            <Binding Path="OtayoriIndex.Value" Converter="{StaticResource IndexNo2DStringVisualNoConverter}"/>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text="通目"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox  StretchDirection="DownOnly" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding Otayori.Value.Name}"/>
+                    </Viewbox>
+                    <TextBlock Text=" さん"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Button  Width="150" Height="50"  Command="{Binding OtayoriNextCommand}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="次の おたより"/>
+                    <TextBlock Margin="10,0,0,0">
+                        <TextBlock.Text>
+                            <Binding Path="OtayoriIndex.Value" Converter="{StaticResource IndexNo2DStringVisualNoConverter}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>1</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text="通目" Margin="0,0,10,0"/>
+                    <TextBlock Text="&gt;"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox  StretchDirection="DownOnly" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding OtayoriNext.Value.Name}"/>
+                    </Viewbox>
+                    <TextBlock Text=" さん"/>
+                </StackPanel>
+            </StackPanel>
+        </Button>
+
+    </StackPanel>
+</UserControl>
