@@ -18,7 +18,11 @@ namespace TamiradiOtayoriReader
         {
             containerRegistry.RegisterSingleton<ViewModels.MainWindowViewModel>();
             containerRegistry.RegisterSingleton<ViewModels.ConfigWindowViewModel>();
-            containerRegistry.RegisterDialog<ConfigWindow>(typeof(ConfigWindow).FullName);
+            containerRegistry.RegisterSingleton<ViewModels.SubWindowViewModel>();
+            containerRegistry.RegisterDialog<SubWindow>(typeof(SubWindow).FullName);
+
+            containerRegistry.RegisterForNavigation<ConfigWindow>();
+            containerRegistry.RegisterForNavigation<MiniControlPanelWindow, ViewModels.ConfigWindowViewModel>();
         }
     }
 }
