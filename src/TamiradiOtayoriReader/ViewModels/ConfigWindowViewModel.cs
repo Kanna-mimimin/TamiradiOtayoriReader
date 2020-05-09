@@ -11,7 +11,7 @@ using System.IO;
 using CsvHelper;
 namespace TamiradiOtayoriReader.ViewModels
 {
-    public class ConfigWindowViewModel : BindableBase, IDialogAware
+    public class ConfigWindowViewModel : BindableBase
     {
         public Models.Config Config { get; }
 
@@ -34,8 +34,9 @@ namespace TamiradiOtayoriReader.ViewModels
         public ReadOnlyReactiveProperty<int> OtayoriMax { get; }
         public ReadOnlyReactiveProperty<int> OtayoriMin { get; }
 
+        public ReactiveCommand<string> NavigationCommand { get; } = new ReactiveCommand<string>();
 
-        public ConfigWindowViewModel(MainWindowViewModel mainWindowViewModel)
+        public ConfigWindowViewModel(SubWindowViewModel subWindowViewModel, MainWindowViewModel mainWindowViewModel)
         {
             Config = mainWindowViewModel.Config;
             Config.CsvFilePath.SetValidateNotifyError(path => System.IO.File.Exists(path) ? null : "CSVファイルを指定してください");
@@ -137,23 +138,9 @@ namespace TamiradiOtayoriReader.ViewModels
             OtayoriBackCommand.Subscribe(() => { OtayoriIndex.Value -= 1; });
             OtayoriNextCommand.Subscribe(() => { OtayoriIndex.Value += 1; });
             OtayoriNextNextCommand.Subscribe(() => { OtayoriIndex.Value += 2; });
-        }
 
-        public string Title => "コントロールパネル";
 
-        public event Action<IDialogResult> RequestClose;
-
-        public bool CanCloseDialog()
-        {
-            return true;
-        }
-
-        public void OnDialogClosed()
-        {
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
+            NavigationCommand.Subscribe(window => subWindowViewModel.SubWindowManager.Value.RequestNavigate("SubContentRegion", window) );
         }
     }
 }

@@ -18,13 +18,12 @@ namespace TamiradiOtayoriReader.ViewModels
         public ReactiveCommand BackCommand { get; }
         public ReactiveCommand NextCommand { get; }
         public ReactiveCommand OpenConfigCommand { get; } = new ReactiveCommand();
-        public ReactiveCommand OpenInputNumCommand { get; } = new ReactiveCommand();
+        bool IsConfigWindowOpend = false;
         public Config Config { get; }
         public string ConfigFilePath { get; }
         public ReactiveCommand<string> CsvFileLoadCmmand { get; } = new ReactiveCommand<string>();
         public ReactiveProperty<string> OtayoriImage { get; }
 
-        bool IsConfigWindowOpend = false;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -77,7 +76,7 @@ namespace TamiradiOtayoriReader.ViewModels
                 {
                     IsConfigWindowOpend = true;
                     IDialogResult result = null;
-                    dialogService.Show(typeof(Views.ConfigWindow).FullName, null, ret => { result = ret; IsConfigWindowOpend = false; });
+                    dialogService.Show(typeof(Views.SubWindow).FullName, null, ret => { result = ret; IsConfigWindowOpend = false; });
                 }
             });
 

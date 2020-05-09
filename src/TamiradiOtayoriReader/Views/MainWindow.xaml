@@ -202,7 +202,7 @@
             <GridSplitter Grid.Row="2" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Sienna"/>
 
             <Grid  Grid.Row="1" Grid.Column="1" x:Name="ContentBase">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
                     <ScrollViewer.Style>
                         <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource CustomScrollViewerStyle}" >
                             <Style.Triggers>
@@ -232,7 +232,7 @@
                         </Style>
                     </ScrollViewer.Style>
                     <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0">
-                        <TextBlock Text="{Binding Otayori.Value.Content}" FontFamily="{Binding Config.ContentFontFamily.Value}" FontSize="{Binding Config.ContentFontSize.Value}" Foreground="{Binding Config.ContentFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left" IsHitTestVisible="False">
+                        <TextBlock Text="{Binding Otayori.Value.Content, NotifyOnTargetUpdated=True}" FontFamily="{Binding Config.ContentFontFamily.Value}" FontSize="{Binding Config.ContentFontSize.Value}" Foreground="{Binding Config.ContentFontColor.Value,Converter={StaticResource ColorToSolidColorBrushValueConverter}}" TargetUpdated="ContentUpdated" VerticalAlignment="Top" HorizontalAlignment="Left" IsHitTestVisible="False">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="TextWrapping" Value="NoWrap"/>
