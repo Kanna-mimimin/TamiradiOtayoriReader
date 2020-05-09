@@ -8,13 +8,6 @@
              xmlns:Converters="clr-namespace:TamiradiOtayoriReader.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Width="600" Height="600">
-    <prism:Dialog.WindowStyle>
-        <Style TargetType="Window">
-            <Setter Property="Icon" Value="/rabbit.ico"/>
-            <Setter Property="ResizeMode" Value="NoResize"/>
-            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
-        </Style>
-    </prism:Dialog.WindowStyle>
     <UserControl.Resources>
         <Converters:IndexNo2DoubleVisualNoConverter x:Key="IndexNo2DoubleVisualNoConverter"/>
         <Converters:IndexNo2DStringVisualNoConverter x:Key="IndexNo2DStringVisualNoConverter"/>
@@ -29,16 +22,16 @@
             <TabItem Header="おたより選択" Background="MintCream" DockPanel.Dock="Top">
                 <StackPanel Background="MintCream" HorizontalAlignment="Stretch">
 
-                    <GroupBox Header="スライダー" Margin="10,0">
-                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <CheckBox x:Name="IsEnableSlider" Content="スライダー有効" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding OtayoriMin.Value}" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Slider Width="300" Value="{Binding OtayoriIndex.Value, Converter={StaticResource IndexNo2DoubleVisualNoConverter}}" Minimum="{Binding OtayoriMin.Value}" Maximum="{Binding OtayoriMax.Value}" IsEnabled="{Binding IsChecked, ElementName=IsEnableSlider}" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                                <TextBlock Text="{Binding OtayoriMax.Value}" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <GroupBox Header="スライダー" Margin="10,0">
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                <CheckBox x:Name="IsEnableSlider" Content="スライダー有効" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding OtayoriMin.Value}" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Slider Width="300" Value="{Binding OtayoriIndex.Value, Converter={StaticResource IndexNo2DoubleVisualNoConverter}}" Minimum="{Binding OtayoriMin.Value}" Maximum="{Binding OtayoriMax.Value}" IsEnabled="{Binding IsChecked, ElementName=IsEnableSlider}" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                                    <TextBlock Text="{Binding OtayoriMax.Value}" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </DockPanel>
                             </DockPanel>
-                        </DockPanel>
-                    </GroupBox>
+                        </GroupBox>
 
                     <GroupBox Header="選択中のおたより" Margin="10,0">
                         <DockPanel>
@@ -569,5 +562,12 @@
                 </DockPanel>
             </TabItem>
         </TabControl>
+        <Button DockPanel.Dock="Left" Width="18" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="10" Command="{Binding NavigationCommand}" CommandParameter="MiniControlPanelWindow">
+            <Viewbox Width="15" Height="15">
+                <Canvas Width="24" Height="24">
+                    <Path Fill="Black" Data="M19.5,3.09L15,7.59V4H13V11H20V9H16.41L20.91,4.5L19.5,3.09M4,13V15H7.59L3.09,19.5L4.5,20.91L9,16.41V20H11V13H4Z" />
+                </Canvas>
+            </Viewbox>
+        </Button>
     </Grid>
 </UserControl>

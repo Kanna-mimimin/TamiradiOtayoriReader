@@ -4,7 +4,7 @@
 お好みの画像の上にお名前と本文が表示できるよ♪
 
 
-## ☆ちょっとした使い方☆
+## ちょっとした使い方🔰
 
 ### ☆インストールほうほう
 [リリースページ](https://github.com/Kanna-mimimin/TamiradiOtayoriReader/releases)から最新版の「TamiradiOtayoriReader-Ver〇.〇.〇.zip」をダウンロードしてお好みの場所に展開するだけ！
@@ -20,7 +20,7 @@
 <a href="./img/googleforms.png" target="_blank"><img src="./img/googleforms.png" width="200"></a>  
 <br />  
 
-### ☆使ってみる♪
+### ☆使ってみる✨
 1. 起動してみる  
 「TamiradiOtayoriReader.exe」を実行します．
 起動するとデフォルトの画像でおたより画面が表示されます．  
@@ -58,9 +58,34 @@
 <a href="./img/otayori3.png" target="_blank"><img src="./img/otayori3.png" width="250"></a>  
 <br />  
 
+### コントロールパネルを小さくしてみる🆕
+
+コントロールパネル画面右上の縮小ボタンをクリックするとミニコントロールパネルに変化するよ‼  
+<a href="./img/ControlPanel-Nomal.png" target="_blank"><img src="./img/ControlPanel-Nomal.png" width="300"></a>  
+　　⬆  
+　変形‼  
+　　⬇  
+ミニコントロールパネル右下の拡大ボタンをクリックすると通常のコントロールパネルに戻るよ  
+<a href="./img/ControlPanel-Mini.png" target="_blank"><img src="./img/ControlPanel-Mini.png"></a>  
+<br /> 
+
 ### ☆OBSキャプチャ確認
 - ウィンドウキャプチャでキャプチャできることを確認！  
-- フィルタのクロマキーに背景色を指定することで背景の透過を確認♪  
+- うぃどキャプチャのフィルタ機能を使用しクロマキーで背景色を指定することで背景の透過を確認♪  
 
-<a href="./img/obs1.png" target="_blank"><img src="./img/obs1.png" width="230"></a>
+<a href="./img/obs1.png" target="_blank"><img src="./img/obs1.png" width="230"></a>  
 <a href="./img/obs2.png" target="_blank"><img src="./img/obs2.png" width="400"></a>  
+<br />  
+
+## 既知の不具合⚠
+* コントロールパネルを開きなおすとラジオボタンの設定内容が壊れる💥  
+➡対策方法が分からないため、コントロールパネルを閉じれないように暫定処置しました💦  
+<br />  
+
+---
+
+|  Ver  |  変更内容  |
+| ---- | ---- |
+|  0.3.0  |  コンパクト版コントロールパネル(おたより選択用)追加<br /> おたより移動時に自動で一番上にスクロール|
+|  0.2.0  |  OBSウィンドキャプチャ対策、CSVヘッダ選択機能追加  |
+|  0.1.0  |  初回リリース |
